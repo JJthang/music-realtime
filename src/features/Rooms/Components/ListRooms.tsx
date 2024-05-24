@@ -12,13 +12,53 @@ import { useNavigate } from "react-router-dom";
 import { PATH_ROUTER } from "src/routers/routers";
 
 import KeyIcon from "@mui/icons-material/Key";
-import { roomsIf } from "src/models/Room.model";
 
-type Props = {
-  listRoomData: roomsIf[] | [];
-};
+const fakeData = [
+  {
+    _id: 0,
+    nameRoom: "Brunch this weekend?",
+    users: [
+      {
+        _id: 0,
+        fullName: "tai Pham",
+        image: "",
+      },
+      {
+        _id: 1,
+        fullName: "thang Pham",
+        image: "",
+      },
+      {
+        _id: 2,
+        fullName: "teo Pham",
+        image: "",
+      },
+    ],
+  },
+  {
+    _id: 1,
+    nameRoom: "Summer BBQ",
+    users: [
+      {
+        _id: 0,
+        fullName: "tai Pham",
+        image: "",
+      },
+      {
+        _id: 1,
+        fullName: "thang Pham",
+        image: "",
+      },
+      {
+        _id: 2,
+        fullName: "teo Pham",
+        image: "",
+      },
+    ],
+  },
+];
 
-const ListRooms = ({ listRoomData }: Props) => {
+const ListRooms = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (idRoom: string) => () => {
@@ -26,6 +66,7 @@ const ListRooms = ({ listRoomData }: Props) => {
 
     navigate(`${PATH_ROUTER.ROOMS}/${idRoom}`);
   };
+
   return (
     <List
       sx={{
@@ -38,7 +79,7 @@ const ListRooms = ({ listRoomData }: Props) => {
         },
       }}
     >
-      {listRoomData.length > 0 && listRoomData.map((e, index) => {
+      {fakeData.map((e, index) => {
         const { _id, nameRoom, users } = e;
 
         return (
@@ -80,7 +121,7 @@ const ListRooms = ({ listRoomData }: Props) => {
             </ListItem>
 
             {/* if this row is last item don't show divider */}
-            {listRoomData.length != index && (
+            {fakeData.length != index && (
               <Divider variant="middle" component="li" />
             )}
           </React.Fragment>
