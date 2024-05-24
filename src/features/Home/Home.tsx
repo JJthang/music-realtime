@@ -6,49 +6,15 @@ import FormControl from "@mui/material/FormControl";
 import SearchIcon from "@mui/icons-material/Search";
 import ListSongs from "src/components/ui/ListItems";
 import SlideImage from "./Components/SlideImage";
-import httpRequest from "src/service/httpRequest";
-import { songUrl } from "src/apis/request";
-import { orderByChild, startAfter } from "firebase/database";
 
 type HomeProps = object & React.PropsWithChildren;
 
 const Home: React.FC<HomeProps> = () => {
-  const [songs, setSongs] = React.useState<looseObj[]>([]);
-  const timeOutApp = React.useRef<any>();
-
-  const handleApiSongs = async (...query: unknown[]) => {
-    try {
-      const getData = await httpRequest.getData(songUrl(), ...query);
-
-      setSongs(getData);
-
-      console.log(getData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onSearchSong = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    timeOutApp.current && clearTimeout(timeOutApp.current);
-
-    timeOutApp.current = setTimeout(() => {
-      const inputValue = e.target.value;
-
-      if (inputValue) {
-        return handleApiSongs(
-          orderByChild("name_song"),
-          startAfter(inputValue)
-        );
-      }
-
-      handleApiSongs();
-    }, 500);
-  };
+  const id = React.useId();
+  console.log(id);
 
   React.useEffect(() => {
-    handleApiSongs();
+    return () => {};
   }, []);
 
   return (
@@ -67,7 +33,6 @@ const Home: React.FC<HomeProps> = () => {
         </InputLabel>
         <OutlinedInput
           id="outlined-adornment-amount"
-          onChange={onSearchSong}
           startAdornment={
             <InputAdornment position="start">
               <SearchIcon />
@@ -77,7 +42,7 @@ const Home: React.FC<HomeProps> = () => {
         />
       </FormControl>
 
-      <ListSongs data={songs} />
+      <ListSongs />
     </div>
   );
 };

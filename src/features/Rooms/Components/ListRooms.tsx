@@ -21,7 +21,7 @@ type Props = {
 const ListRooms = ({ listRoomData }: Props) => {
   const navigate = useNavigate();
 
-  const handleNavigate = (idRoom: number) => () => {
+  const handleNavigate = (idRoom: string) => () => {
     if ((idRoom ?? null) === null) return;
 
     navigate(`${PATH_ROUTER.ROOMS}/${idRoom}`);
