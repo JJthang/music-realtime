@@ -5,12 +5,13 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import SearchIcon from "@mui/icons-material/Search";
 import ListRooms from "./Components/ListRooms";
+import CreateRoom from "./Components/CreateRoom";
 
 type RoomsProps = object & React.PropsWithChildren;
 
 const Rooms: React.FC<RoomsProps> = () => {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", flexWrap: "wrap"}}>
       <FormControl fullWidth sx={{ m: 1 }}>
         <InputLabel htmlFor="outlined-adornment-amount">Search Room</InputLabel>
         <OutlinedInput
@@ -23,8 +24,8 @@ const Rooms: React.FC<RoomsProps> = () => {
           label="Search Songs"
         />
       </FormControl>
-
       <ListRooms />
+      <CreateRoom />
     </div>
   );
 };
